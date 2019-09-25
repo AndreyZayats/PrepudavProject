@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "prepudav_user")
-public class User {
+@Table(name = "prepudav_admin")
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,16 +23,12 @@ public class User {
     private String lastName;
     private String login;
     private String hashPassword;
-    private int age;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
     @Enumerated(value = EnumType.STRING)
     private State state;
 
-    //in future change to enum
-    private String university;
-
-    @OneToMany(mappedBy = "user")
-    List<UserToken> tokens;
+    @OneToMany(mappedBy = "admin")
+    List<AdminToken> tokens;
 }

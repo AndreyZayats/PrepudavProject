@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.prepudav.services.forms.LoginForm;
-import ru.prepudav.services.services.LoginService;
-import ru.prepudav.services.transfer.TokenDto;
+import ru.prepudav.services.services.LoginUserService;
+import ru.prepudav.services.transfer.TokenUserDto;
 
 @RestController
-public class LoginController {
+public class LoginUserController {
     @Autowired
-    private LoginService loginService;
+    private LoginUserService loginUserService;
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody LoginForm loginForm) {
-        return ResponseEntity.ok(loginService.login(loginForm));
+    public ResponseEntity<TokenUserDto> login(@RequestBody LoginForm loginForm) {
+        return ResponseEntity.ok(loginUserService.login(loginForm));
     }
 }

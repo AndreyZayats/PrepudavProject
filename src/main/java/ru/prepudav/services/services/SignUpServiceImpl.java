@@ -3,7 +3,7 @@ package ru.prepudav.services.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.prepudav.services.forms.UserForm;
+import ru.prepudav.services.forms.SignUpForm;
 import ru.prepudav.services.models.Role;
 import ru.prepudav.services.models.State;
 import ru.prepudav.services.models.User;
@@ -21,15 +21,15 @@ public class SignUpServiceImpl implements SignUpService {
     }
 
     @Override
-    public void signUp(UserForm userForm) {
-        String hashPassword = passwordEncoder.encode(userForm.getPassword());
+    public void signUp(SignUpForm signUpForm) {
+        String hashPassword = passwordEncoder.encode(signUpForm.getPassword());
         User user = User.builder()
-                .firstName(userForm.getFirstName())
-                .lastName(userForm.getLastName())
+                .firstName(signUpForm.getFirstName())
+                .lastName(signUpForm.getLastName())
                 .hashPassword(hashPassword)
-                .login(userForm.getLogin())
-                .age(userForm.getAge())
-                .university(userForm.getUniversity())
+                .login(signUpForm.getLogin())
+                .age(signUpForm.getAge())
+                .university(signUpForm.getUniversity())
                 .role(Role.USER)
                 .state(State.ACTIVE).build();
 

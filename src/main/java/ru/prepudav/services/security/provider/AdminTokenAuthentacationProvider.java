@@ -8,18 +8,18 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
-import ru.prepudav.services.models.Token;
-import ru.prepudav.services.repositories.TokensRepository;
+import ru.prepudav.services.models.AdminToken;
+import ru.prepudav.services.repositories.TokensAdminRepository;
 import ru.prepudav.services.security.token.TokenAuthentication;
 
 import java.util.Optional;
 
 @Component
-public class TokenAuthentacationProvider implements AuthenticationProvider {
+public class AdminTokenAuthentacationProvider implements AuthenticationProvider {
     @Autowired
-    private TokensRepository tokensRepository;
+    private TokensAdminRepository tokensAdminRepository;
 
-    @Qualifier("userDetailsServiceImpl")
+    @Qualifier("adminDetailsServiceImpl")
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -27,10 +27,10 @@ public class TokenAuthentacationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         TokenAuthentication tokenAuthentication = (TokenAuthentication) authentication;
 
-        Optional<Token> tokenCandidate = tokensRepository.findOneByValue(tokenAuthentication.getName());
+        Optional<AdminToken> tokenCandidate = tokensAdminRepository.findOneByValue(tokenAuthentication.getName());
 
         if(tokenCandidate.isPresent()) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(tokenCandidate.get().getUser().getLogin());
+            UserDetails userDetails = userDetailsService.loadUserByUsername(tokenCandidate.get().getAdmin().getLogin());
 
             tokenAuthentication.setUserDetails(userDetails);
             tokenAuthentication.setAuthenticated(true);
