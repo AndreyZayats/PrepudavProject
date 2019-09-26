@@ -14,4 +14,5 @@ public class SignUpForm {
     private String password;
     private int age;
     private String university;
+    private boolean isTeacher;
 }

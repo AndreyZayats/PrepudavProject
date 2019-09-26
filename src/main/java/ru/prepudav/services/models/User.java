@@ -24,6 +24,7 @@ public class User {
     private String login;
     private String hashPassword;
     private int age;
+    private boolean isTeacher;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;

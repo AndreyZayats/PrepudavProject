@@ -4,7 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.prepudav.services.forms.LoginAdminForm;
+import ru.prepudav.services.forms.LoginForm;
 import ru.prepudav.services.models.Admin;
 import ru.prepudav.services.models.AdminToken;
 import ru.prepudav.services.repositories.AdminRepository;
@@ -28,7 +28,7 @@ public class LoginAdminServiceImpl implements LoginAdminService {
     private AdminRepository adminRepository;
 
     @Override
-    public TokenAdminDto loginAdmin(LoginAdminForm loginAdminForm) {
+    public TokenAdminDto loginAdmin(LoginForm loginAdminForm) {
         Optional<Admin> adminCandidate = adminRepository.findOneByLogin(loginAdminForm.getLogin());
         if(adminCandidate.isPresent()) {
             Admin admin = adminCandidate.get();

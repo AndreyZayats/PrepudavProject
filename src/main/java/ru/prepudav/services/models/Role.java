@@ -1,5 +1,5 @@
 package ru.prepudav.services.models;
 
 public enum Role {
-    ADMIN, USER
+    ADMIN, USER, TEACHER
 }

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.prepudav.services.forms.LoginAdminForm;
+import ru.prepudav.services.forms.LoginForm;
 import ru.prepudav.services.services.LoginAdminService;
 import ru.prepudav.services.transfer.TokenAdminDto;
 
@@ -15,7 +15,7 @@ public class LoginAdminController {
     private LoginAdminService loginAdminService;
 
     @PostMapping("/loginAdmin")
-    public ResponseEntity<TokenAdminDto> login(@RequestBody LoginAdminForm loginAdminForm) {
+    public ResponseEntity<TokenAdminDto> login(@RequestBody LoginForm loginAdminForm) {
         return ResponseEntity.ok(loginAdminService.loginAdmin(loginAdminForm));
     }
 }

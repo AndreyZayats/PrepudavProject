@@ -23,16 +23,29 @@ public class SignUpServiceImpl implements SignUpService {
     @Override
     public void signUp(SignUpForm signUpForm) {
         String hashPassword = passwordEncoder.encode(signUpForm.getPassword());
-        User user = User.builder()
+        if(signUpForm.isTeacher()) {User user = User.builder()
                 .firstName(signUpForm.getFirstName())
                 .lastName(signUpForm.getLastName())
                 .hashPassword(hashPassword)
                 .login(signUpForm.getLogin())
                 .age(signUpForm.getAge())
                 .university(signUpForm.getUniversity())
-                .role(Role.USER)
+                .isTeacher(signUpForm.isTeacher())
+                .role(Role.TEACHER)
                 .state(State.ACTIVE).build();
-
-        usersRepository.save(user);
+            usersRepository.save(user);
+        } else {
+            User user = User.builder()
+                    .firstName(signUpForm.getFirstName())
+                    .lastName(signUpForm.getLastName())
+                    .hashPassword(hashPassword)
+                    .login(signUpForm.getLogin())
+                    .age(signUpForm.getAge())
+                    .university(signUpForm.getUniversity())
+                    .isTeacher(!signUpForm.isTeacher())
+                    .role(Role.USER)
+                    .state(State.ACTIVE).build();
+            usersRepository.save(user);
+        }
     }
 }
